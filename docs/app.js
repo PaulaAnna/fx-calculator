@@ -11,11 +11,11 @@ document.querySelectorAll('select').forEach(element => {
         <option value="CHF">CHF</option>
         <option value="SEK">SEK</option>
     `;
-
 });
 
 document.querySelector('button').addEventListener('click', () => {
-   const inputValue = document.querySelector('[name="input-value"]').value;
+
+    const inputValue = document.querySelector('[name="input-value"]').value;
     const inputCurrency = document.querySelector('[name="input-currency"]').value;
     const outputCurrency = document.querySelector('[name="output-currency"]').value;
 
@@ -41,7 +41,7 @@ function convert(inputValue, inputCurrency, outputCurrency) {
                 }
 
             }).then((data) => {
-                let rates = data['rates'];
+            let rates = data['rates'];
             rates["EUR"] = 1;
 
             if (inputCurrency != "EUR") {
@@ -50,4 +50,10 @@ function convert(inputValue, inputCurrency, outputCurrency) {
             resolve(inputValue * rates[outputCurrency]);
         });
     });
+}
+
+
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('sw.js')
+        .catch(console.error);
 }
